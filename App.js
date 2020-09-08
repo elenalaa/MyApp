@@ -9,7 +9,7 @@ const App = () => {
   return (
     <SafeAreaView style={styles.container}>
       <List />
-      <Text>git</Text>
+      
       <StatusBar style="auto" />
     </SafeAreaView>
   );
