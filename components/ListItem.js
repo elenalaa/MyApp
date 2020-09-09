@@ -1,21 +1,26 @@
-/* eslint-disable max-len */
-import React from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
+mport React from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import PropTypes from 'prop-types';
 
+const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
 const ListItem = (props) => {
   return (
-    <TouchableOpacity>
-      <View style={styles.imageBox}>
+    <TouchableOpacity style={styles.row}>
+      <View style={styles.imagebox}>
         <Image
-          style={{width: 100, height: 100}}
-          source={{uri: props.singleMedia.thumbnails.w160}}
+          style={styles.image}
+          source={{uri: mediaUrl + props.singleMedia.thumbnails.w160}}
         />
       </View>
-
-      <View>
-        <Text>{props.singleMedia.title}</Text>
+      <View style={styles.textbox}>
+        <Text style={styles.listTitle}>{props.singleMedia.title}</Text>
         <Text>{props.singleMedia.description}</Text>
       </View>
     </TouchableOpacity>
@@ -23,8 +28,28 @@ const ListItem = (props) => {
 };
 
 const styles = StyleSheet.create({
-  imageBox: {
+  row: {
+    flexDirection: 'row',
+    padding: 15,
+    marginBottom: 5,
+    backgroundColor: '#eee',
+    borderRadius: 16,
+  },
+  imagebox: {
     flex: 1,
+  },
+  image: {
+    flex: 1,
+    borderRadius: 16,
+  },
+  textbox: {
+    flex: 2,
+    padding: 10,
+  },
+  listTitle: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    paddingBottom: 15,
   },
 });
 
