@@ -1,3 +1,4 @@
+
 import {useState, useEffect} from 'react';
 
 const apiUrl = 'http://media.mw.metropolia.fi/wbma/';
@@ -83,4 +84,24 @@ const checkToken = async (token) => {
   }
 };
 
-export {useLoadMedia, postLogIn, checkToken, postRegistration};
+const getAvatar = async () => {
+  try {
+    const response = await fetch(apiUrl + 'tags/avatar_6');
+    const avatarImages = await response.json();
+    if (response.ok) {
+      return avatarImages;
+    } else {
+      throw new Error(avatarImages.message);
+    }
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+
+export {
+  useLoadMedia,
+  postLogIn,
+  checkToken,
+  postRegistration,
+  getAvatar,
+};
