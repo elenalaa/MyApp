@@ -29,7 +29,13 @@ const Upload = ({navigation}) => {
     formData.append('file', {uri: image, name: filename, type});
     const userToken = await AsyncStorage.getItem('userToken');
     const resp = await upload(formData, userToken);
-    console.log('Upload', resp);
+    console.log('File uploaded: ', resp);
+
+    // wait for 2 secs
+    setTimeout(() => {
+      doReset();
+      navigation.push('Home');
+    }, 2000);
   };
 
   const pickImage = async () => {
@@ -67,10 +73,16 @@ const Upload = ({navigation}) => {
 
   const {
     handleInputChange,
+    reset,
     uploadErrors,
     inputs,
   } = useUploadForm();
 
+  const doReset = () => {
+    reset();
+    setImage(null);
+    // console.log(inputs);
+  };
 
   return (
     <Container>
@@ -85,12 +97,14 @@ const Upload = ({navigation}) => {
           <FormTextInput
             autoCapitalize="none"
             placeholder="title"
+            value={inputs.title}
             onChangeText={(txt) => handleInputChange('title', txt)}
             error={uploadErrors.title}
           />
           <FormTextInput
             autoCapitalize="none"
             placeholder="description"
+            value={inputs.description}
             onChangeText={(txt) => handleInputChange('description', txt)}
             error={uploadErrors.description}
           />
@@ -98,8 +112,14 @@ const Upload = ({navigation}) => {
         <Button block onPress={pickImage}>
           <Text>Choose file</Text>
         </Button>
-        <Button block onPress={doUpload}>
+        <Button block
+          disabled={(uploadErrors.title !== null ||
+            uploadErrors.description !== null || image === null)}
+          onPress={doUpload}>
           <Text>Upload</Text>
+        </Button>
+        <Button block onPress={doReset}>
+          <Text>Reset</Text>
         </Button>
       </Content>
     </Container>
