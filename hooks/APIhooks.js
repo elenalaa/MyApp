@@ -126,7 +126,8 @@ const upload = async (fd, token) => {
 
   try {
     const response = await axios(options);
-    console.log('Axios', response.data);
+    // console.log('Axios', response.data);
+    return response.data;
   } catch (e) {
     throw new Error(e.message);
   }

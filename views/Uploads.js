@@ -5,14 +5,17 @@ import FormTextInput from '../components/FormTextInput';
 import {Image, Platform} from 'react-native';
 import useUploadForm from '../hooks/UploadHooks';
 import * as ImagePicker from 'expo-image-picker';
+// eslint-disable-next-line no-unused-vars
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
+import {upload} from '../hooks/APIhooks';
+import AsyncStorage from '@react-native-community/async-storage';
 
 
 const Upload = ({navigation}) => {
   const [image, setImage] = useState(null);
 
-  const doUpload = () => {
+  const doUpload = async () => {
     const formData = new FormData();
     // lisätään tekstikentät formDataan
     formData.append('title', inputs.title);
@@ -24,8 +27,9 @@ const Upload = ({navigation}) => {
     let type = match ? `image/${match[1]}` : `image`;
     if (type === 'image/jpg') type = 'image/jpeg';
     formData.append('file', {uri: image, name: filename, type});
-
-    console.log('Upload', formData);
+    const userToken = await AsyncStorage.getItem('userToken');
+    const resp = await upload(formData, userToken);
+    console.log('Upload', resp);
   };
 
   const pickImage = async () => {
