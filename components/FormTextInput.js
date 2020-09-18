@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Item, Input } from 'native-base';
+import { View, Label, Item, Input } from 'native-base';
 
 const FormTextInput = ({ style, error, ...otherProps }) => {
   return (
