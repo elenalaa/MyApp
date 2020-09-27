@@ -13,7 +13,7 @@ import {
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
-function ListItem({ navigation, singleMedia }) {
+function ListItem({ navigation, singleMedia, editadle }) {
   return (
     <NBListItem thumbnail>
       <Left>
@@ -32,6 +32,23 @@ function ListItem({ navigation, singleMedia }) {
           <Icon name={'eye'}></Icon>
           <Text>View</Text>
         </Button>
+        {editable && <>
+          <Button success transparent onPress={
+            () => {
+              // modify
+            }}>
+            <Icon name={'create'}></Icon>
+            <Text>Modify</Text>
+          </Button>
+          <Button danger transparent onPress={
+            () => {
+              // TODO: use api to delete file
+            }}>
+            <Icon name={'trash'}></Icon>
+            <Text>Delete</Text>
+          </Button>
+        </>
+        }
       </Right>
     </NBListItem>
   );
@@ -40,6 +57,7 @@ function ListItem({ navigation, singleMedia }) {
 ListItem.propTypes = {
   singleMedia: PropTypes.object,
   navigation: PropTypes.object,
+  editable: PropTypes.bool,
 };
 
 export default ListItem;
