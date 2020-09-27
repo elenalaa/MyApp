@@ -2,7 +2,7 @@ import axios from 'axios';
 import {useState, useEffect} from 'react';
 
 const apiUrl = 'http://media.mw.metropolia.fi/wbma/';
-const appIdentifier = 'elenaelen';
+const appIdentifier = 'elena';
 
 const useLoadMedia = () => {
   const [mediaArray, setMediaArray] = useState([]);
@@ -17,7 +17,7 @@ const useLoadMedia = () => {
         const json2 = await resp2.json();
         return json2;
       }));
-      // console.log('loadMedia', media);
+      console.log('loadMedia', media);
       setMediaArray(media);
     } catch (e) {
       console.error(e);
@@ -167,7 +167,7 @@ export {
   postRegistration,
   getAvatar,
   checkAvailable,
-  //upload,
-  //postTag,
-  //appIdentifier,
+  upload,
+  postTag,
+  appIdentifier,
 };
