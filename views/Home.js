@@ -13,7 +13,7 @@ const Home = ({navigation}) => {
   // const navigation = props.navigation;
   return (
     <SafeAreaView style={styles.container}>
-      <List navigation={navigation} />
+      <List navigation={navigation} all />
       <StatusBar style="auto" />
     </SafeAreaView>
   );
